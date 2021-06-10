@@ -1,0 +1,29 @@
+# Default Values
+APP_NAME: pipestarter
+APP_IMAGE_NAME: git.crptech.ru:5005/crpt_monitoring/development/crpt_mon_app_pipestarter
+APP_IMAGE_TAG: "0.0.2"
+
+PROM_ID: "1429" 
+OP_ID: "1437"
+INV_ID: "233"
+FULL_DOMAIN: pipestarter.prod01.monitoring.crpt.tech
+MAIL_FROM: mon@crpt.ru
+SMTP_HOST: "mail1.crpt.ru"
+SMTP_PORT: "587"
+
+
+replicaCount: 1
+
+app:
+  listen:
+    port: 8080
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  requests:
+    memory: 100Mi
+  limits:
+    memory: 2096Mi

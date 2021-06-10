@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.APP_NAME }}"
+  labels:
+    app: "{{ .Values.APP_NAME }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.APP_NAME }}"
+  template:
+    metadata:
+      name: "{{ .Values.APP_NAME }}"
+      labels:
+        app: "{{ .Values.APP_NAME }}"
+    spec:
+      imagePullSecrets:
+        - name: registry-{{ .Values.LANDSCAPE }}
+      containers:
+        - image: "{{ .Values.APP_IMAGE_NAME }}:{{ .Values.APP_IMAGE_TAG }}"
+          imagePullPolicy: Always
+          name: "{{ .Values.APP_NAME }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: {{ .Values.app.listen.port }}
+          env:
+            - name: INV_ID
+              value: "{{ .Values.INV_ID }}"
+            - name: PROM_ID
+              value: "{{ .Values.PROM_ID }}"
+            - name: OP_ID
+              value: "{{ .Values.OP_ID }}"
+            - name: GIT_TOKEN
+              value: "{{ .Values.GIT_TOKEN }}"
+            - name: CI_API_V4_URL
+              value: "{{ .Values.CI_API_V4_URL }}"
+            - name: PORT
+              value: "{{ .Values.app.listen.port }}"
+            - name: MAIL_FROM
+              value: "{{ .Values.MAIL_FROM }}"
+            - name: SMTP_HOST
+              value: "{{ .Values.SMTP_HOST }}"
+            - name: SMTP_PORT
+              value: "{{ .Values.SMTP_PORT }}"

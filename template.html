@@ -1,0 +1,10 @@
+<!-- template.html -->
+<!DOCTYPE html>
+<html>
+<body>
+    <h2 style="color: #5e9ca0;">Pipeline, запущенный при коммите в <a href="{{.InventoryURL}}/-/tree/{{.Branch}}">inventory_vars</a> или в <a href="{{.MonVarsURL}}/-/tree/{{.Branch}}">monitoring_vars</a> упал с ошибкой.</h2><br/>
+    <h3>Надо проверить корректность содержимого файлов в данных ветках.</h3>
+    <h3>Для диагностики можно проверить с какой ошибкой упала раскатка по <a href="{{.ProjectURL}}/-/pipelines/{{.PipelineID}}">ссылке.</a></h3><br/></body>
+    <br/>
+    <p>Группа развития и сопровождения мониторинговых систем.</p>
+</html>

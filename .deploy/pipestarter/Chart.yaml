@@ -1,0 +1,8 @@
+apiVersion: v1
+description: "Helm chart for pipestarter"
+name: "pipestarter"
+version: "0.0.1"
+appVersion: "0.0.1"
+maintainers:
+- name: crpt
+  email: crpt@crpt.ru

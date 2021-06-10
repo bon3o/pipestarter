@@ -1,0 +1,29 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: "{{ .Values.APP_NAME }}"
+  namespace: "{{ .Values.LANDSCAPE }}"
+spec:
+  rules:
+    - host: "{{ .Values.FULL_DOMAIN }}"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: "{{ .Values.APP_NAME }}"
+              servicePort: {{ .Values.app.listen.port }}
+                         
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.APP_NAME }}"
+  namespace: "{{ .Values.LANDSCAPE }}"
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.app.listen.port }}
+      targetPort: {{ .Values.app.listen.port }}
+  selector:
+    app: "{{ .Values.APP_NAME }}"
